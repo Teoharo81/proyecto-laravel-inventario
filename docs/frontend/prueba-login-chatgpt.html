@@ -1,0 +1,1301 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Inventario - Administración</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<!-- ========================================================= -->
+<!-- LOGIN -->
+<!-- ========================================================= -->
+
+<div id="loginView" class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="w-full max-w-md">
+
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+
+            <!-- Encabezado -->
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 px-8 py-10 text-center">
+
+                <div class="mx-auto w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg mb-5">
+                    <svg class="w-10 h-10 text-blue-600"
+                         fill="none"
+                         stroke="currentColor"
+                         viewBox="0 0 24 24">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                </div>
+
+                <h1 class="text-3xl font-bold text-white">
+                    Sistema de Inventario
+                </h1>
+
+                <p class="text-blue-100 mt-2">
+                    Panel de Administración
+                </p>
+
+            </div>
+
+            <!-- Formulario -->
+            <div class="p-8">
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                    Iniciar sesión
+                </h2>
+
+                <p class="text-gray-500 mb-6">
+                    Ingresa tus credenciales para continuar
+                </p>
+
+                <form id="loginForm">
+
+                    <!-- Email -->
+                    <div class="mb-5">
+
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            value="admin@mail.com"
+                            required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg
+                                   focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                   outline-none transition"
+                            placeholder="correo@ejemplo.com"
+                        >
+
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-5">
+
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            Contraseña
+                        </label>
+
+                        <div class="relative">
+
+                            <input
+                                type="password"
+                                id="password"
+                                value="Admin54321#"
+                                required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg
+                                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                                       outline-none transition pr-12"
+                                placeholder="********"
+                            >
+
+                            <button
+                                type="button"
+                                onclick="mostrarPassword()"
+                                class="absolute right-3 top-3 text-gray-500 hover:text-blue-600">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Mensaje -->
+                    <div id="loginMessage"
+                         class="hidden mb-5 p-3 rounded-lg text-sm">
+                    </div>
+
+                    <!-- Botón -->
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="w-full bg-blue-600 hover:bg-blue-700
+                               text-white font-semibold py-3 px-4 rounded-lg
+                               transition duration-200">
+
+                        Ingresar al sistema
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <p class="text-center text-gray-500 text-sm mt-6">
+            Sistema de Inventario © 2026
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- PANEL ADMINISTRATIVO -->
+<!-- ========================================================= -->
+
+<div id="adminView" class="hidden min-h-screen">
+
+    <!-- SIDEBAR -->
+
+    <aside id="sidebar"
+           class="fixed left-0 top-0 z-40 h-screen w-64
+                  bg-gray-900 text-white transform -translate-x-full
+                  lg:translate-x-0 transition-transform duration-300">
+
+        <!-- Logo -->
+
+        <div class="h-20 flex items-center px-6 border-b border-gray-700">
+
+            <div class="w-10 h-10 bg-blue-600 rounded-lg
+                        flex items-center justify-center mr-3">
+
+                📦
+
+            </div>
+
+            <div>
+
+                <h1 class="font-bold text-lg">
+                    Inventario
+                </h1>
+
+                <p class="text-xs text-gray-400">
+                    Administración
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- Menu -->
+
+        <nav class="p-4">
+
+            <p class="text-xs text-gray-500 uppercase font-semibold mb-3">
+                Principal
+            </p>
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg
+                      bg-blue-600 text-white mb-2">
+
+                📊
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg
+                      hover:bg-gray-800 transition mb-2">
+
+                📦
+
+                <span>
+                    Productos
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg
+                      hover:bg-gray-800 transition mb-2">
+
+                🏷️
+
+                <span>
+                    Categorías
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg
+                      hover:bg-gray-800 transition mb-2">
+
+                📥
+
+                <span>
+                    Entradas
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg
+                      hover:bg-gray-800 transition mb-2">
+
+                📤
+
+                <span>
+                    Salidas
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="flex items-center gap-3 px-4 py-3 rounded-lg
+                      hover:bg-gray-800 transition mb-2">
+
+                👥
+
+                <span>
+                    Usuarios
+                </span>
+
+            </a>
+
+
+            <div class="border-t border-gray-700 my-6"></div>
+
+
+            <p class="text-xs text-gray-500 uppercase font-semibold mb-3">
+                Cuenta
+            </p>
+
+
+            <button
+                onclick="mostrarPerfil()"
+                class="w-full flex items-center gap-3 px-4 py-3 rounded-lg
+                       hover:bg-gray-800 transition text-left">
+
+                👤
+
+                <span>
+                    Mi perfil
+                </span>
+
+            </button>
+
+
+            <button
+                onclick="logout()"
+                class="w-full flex items-center gap-3 px-4 py-3 rounded-lg
+                       hover:bg-red-600 transition text-left mt-2">
+
+                🚪
+
+                <span>
+                    Cerrar sesión
+                </span>
+
+            </button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTENIDO -->
+
+    <div class="lg:ml-64">
+
+        <!-- HEADER -->
+
+        <header class="h-20 bg-white border-b shadow-sm
+                       flex items-center justify-between px-6">
+
+            <div class="flex items-center">
+
+                <button
+                    onclick="toggleSidebar()"
+                    class="lg:hidden mr-4 text-gray-600">
+
+                    ☰
+
+                </button>
+
+                <div>
+
+                    <h2 class="text-xl font-bold text-gray-800">
+                        Dashboard
+                    </h2>
+
+                    <p class="text-sm text-gray-500">
+                        Administración del sistema de inventario
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Usuario -->
+
+            <div class="flex items-center gap-3">
+
+                <div class="hidden sm:block text-right">
+
+                    <p id="headerName"
+                       class="font-semibold text-gray-800">
+                        Usuario
+                    </p>
+
+                    <p id="headerEmail"
+                       class="text-xs text-gray-500">
+                        usuario@email.com
+                    </p>
+
+                </div>
+
+                <button
+                    onclick="mostrarPerfil()"
+                    class="w-11 h-11 bg-blue-600 text-white
+                           rounded-full flex items-center justify-center
+                           font-bold">
+
+                    <span id="headerInitial">
+                        U
+                    </span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- MAIN -->
+
+        <main class="p-6">
+
+
+            <!-- Tarjetas -->
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
+
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
+
+                    <div class="flex justify-between">
+
+                        <div>
+
+                            <p class="text-sm text-gray-500">
+                                Productos
+                            </p>
+
+                            <h3 class="text-3xl font-bold text-gray-800 mt-2">
+                                0
+                            </h3>
+
+                        </div>
+
+                        <div class="w-12 h-12 bg-blue-100
+                                    text-blue-600 rounded-lg
+                                    flex items-center justify-center text-2xl">
+
+                            📦
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
+
+                    <div class="flex justify-between">
+
+                        <div>
+
+                            <p class="text-sm text-gray-500">
+                                Stock disponible
+                            </p>
+
+                            <h3 class="text-3xl font-bold text-gray-800 mt-2">
+                                0
+                            </h3>
+
+                        </div>
+
+                        <div class="w-12 h-12 bg-green-100
+                                    text-green-600 rounded-lg
+                                    flex items-center justify-center text-2xl">
+
+                            📊
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-yellow-500">
+
+                    <div class="flex justify-between">
+
+                        <div>
+
+                            <p class="text-sm text-gray-500">
+                                Entradas
+                            </p>
+
+                            <h3 class="text-3xl font-bold text-gray-800 mt-2">
+                                0
+                            </h3>
+
+                        </div>
+
+                        <div class="w-12 h-12 bg-yellow-100
+                                    text-yellow-600 rounded-lg
+                                    flex items-center justify-center text-2xl">
+
+                            📥
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-red-500">
+
+                    <div class="flex justify-between">
+
+                        <div>
+
+                            <p class="text-sm text-gray-500">
+                                Salidas
+                            </p>
+
+                            <h3 class="text-3xl font-bold text-gray-800 mt-2">
+                                0
+                            </h3>
+
+                        </div>
+
+                        <div class="w-12 h-12 bg-red-100
+                                    text-red-600 rounded-lg
+                                    flex items-center justify-center text-2xl">
+
+                            📤
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PERFIL -->
+
+            <div id="profileCard"
+                 class="bg-white rounded-xl shadow-sm p-6">
+
+                <div class="flex items-center justify-between mb-6">
+
+                    <div>
+
+                        <h3 class="text-xl font-bold text-gray-800">
+                            Perfil del usuario
+                        </h3>
+
+                        <p class="text-gray-500 text-sm">
+                            Información de la cuenta autenticada
+                        </p>
+
+                    </div>
+
+                    <button
+                        onclick="cargarPerfil()"
+                        class="bg-blue-600 hover:bg-blue-700
+                               text-white px-4 py-2 rounded-lg">
+
+                        🔄 Actualizar
+
+                    </button>
+
+                </div>
+
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+
+                    <!-- Avatar -->
+
+                    <div class="flex flex-col items-center justify-center">
+
+                        <div id="profileAvatar"
+                             class="w-28 h-28 bg-blue-600 text-white
+                                    rounded-full flex items-center
+                                    justify-center text-4xl font-bold">
+
+                            U
+
+                        </div>
+
+                        <h4 id="profileName"
+                            class="text-xl font-bold text-gray-800 mt-4">
+
+                            Cargando...
+
+                        </h4>
+
+                        <p class="text-gray-500">
+                            Usuario autenticado
+                        </p>
+
+                    </div>
+
+
+                    <!-- Datos -->
+
+                    <div class="md:col-span-2">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+                            <div class="bg-gray-50 p-4 rounded-lg">
+
+                                <p class="text-xs text-gray-500 uppercase">
+                                    ID
+                                </p>
+
+                                <p id="profileId"
+                                   class="font-semibold text-gray-800 mt-1">
+                                    -
+                                </p>
+
+                            </div>
+
+
+                            <div class="bg-gray-50 p-4 rounded-lg">
+
+                                <p class="text-xs text-gray-500 uppercase">
+                                    Nombre
+                                </p>
+
+                                <p id="profileFullName"
+                                   class="font-semibold text-gray-800 mt-1">
+                                    -
+                                </p>
+
+                            </div>
+
+
+                            <div class="bg-gray-50 p-4 rounded-lg">
+
+                                <p class="text-xs text-gray-500 uppercase">
+                                    Correo electrónico
+                                </p>
+
+                                <p id="profileEmail"
+                                   class="font-semibold text-gray-800 mt-1">
+                                    -
+                                </p>
+
+                            </div>
+
+
+                            <div class="bg-gray-50 p-4 rounded-lg">
+
+                                <p class="text-xs text-gray-500 uppercase">
+                                    Estado
+                                </p>
+
+                                <span
+                                    class="inline-flex mt-1 px-3 py-1
+                                           rounded-full bg-green-100
+                                           text-green-700 text-sm font-semibold">
+
+                                    ● Autenticado
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MENSAJE API -->
+
+            <div id="apiMessage"
+                 class="hidden mt-6 p-4 rounded-lg">
+            </div>
+
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+/*
+|--------------------------------------------------------------------------
+| CONFIGURACIÓN
+|--------------------------------------------------------------------------
+*/
+
+const API_URL = "http://localhost:8000/api/v1";
+
+
+/*
+|--------------------------------------------------------------------------
+| ELEMENTOS
+|--------------------------------------------------------------------------
+*/
+
+const loginView = document.getElementById("loginView");
+const adminView = document.getElementById("adminView");
+const loginForm = document.getElementById("loginForm");
+const loginButton = document.getElementById("loginButton");
+
+
+/*
+|--------------------------------------------------------------------------
+| LOGIN
+|--------------------------------------------------------------------------
+*/
+
+loginForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+
+    loginButton.disabled = true;
+
+    loginButton.innerHTML = `
+        <span class="inline-flex items-center gap-2">
+            <svg class="animate-spin h-5 w-5"
+                 viewBox="0 0 24 24">
+                <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4">
+                </circle>
+                <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+                </path>
+            </svg>
+
+            Autenticando...
+        </span>
+    `;
+
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/auth/login`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Las credenciales son incorrectas."
+            );
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | BUSCAR TOKEN
+        |--------------------------------------------------------------------------
+        |
+        | Dependiendo de cómo hayas programado tu Laravel API,
+        | el token puede venir como:
+        |
+        | data.token
+        | data.access_token
+        | data.data.token
+        |
+        */
+
+        const token =
+            data.token ||
+            data.access_token ||
+            data.data?.token ||
+            data.data?.access_token;
+
+
+        if (!token) {
+
+            console.log("Respuesta completa del login:", data);
+
+            throw new Error(
+                "El servidor respondió correctamente pero no se encontró el token."
+            );
+
+        }
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | GUARDAR TOKEN
+        |--------------------------------------------------------------------------
+        */
+
+        localStorage.setItem("auth_token", token);
+
+
+        mostrarMensaje(
+            "loginMessage",
+            "Login correcto. Cargando administración...",
+            "success"
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | MOSTRAR PANEL
+        |--------------------------------------------------------------------------
+        */
+
+        setTimeout(() => {
+
+            mostrarAdmin();
+
+            cargarPerfil();
+
+        }, 500);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        mostrarMensaje(
+            "loginMessage",
+            error.message,
+            "error"
+        );
+
+    } finally {
+
+        loginButton.disabled = false;
+
+        loginButton.innerHTML =
+            "Ingresar al sistema";
+
+    }
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| MOSTRAR ADMINISTRACIÓN
+|--------------------------------------------------------------------------
+*/
+
+function mostrarAdmin() {
+
+    loginView.classList.add("hidden");
+
+    adminView.classList.remove("hidden");
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CARGAR PERFIL
+|--------------------------------------------------------------------------
+*/
+
+async function cargarPerfil() {
+
+    const token = localStorage.getItem("auth_token");
+
+
+    if (!token) {
+
+        cerrarSesionLocal();
+
+        return;
+
+    }
+
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/auth/profile`,
+            {
+                method: "GET",
+
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | TOKEN INVÁLIDO / EXPIRADO
+        |--------------------------------------------------------------------------
+        */
+
+        if (response.status === 401) {
+
+            localStorage.removeItem("auth_token");
+
+            alert("Tu sesión ha expirado.");
+
+            cerrarSesionLocal();
+
+            return;
+
+        }
+
+
+        const data = await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "No fue posible obtener el perfil."
+            );
+
+        }
+
+
+        console.log("Respuesta PROFILE:", data);
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | OBTENER USUARIO
+        |--------------------------------------------------------------------------
+        |
+        | Soporta respuestas como:
+        |
+        | { id, name, email }
+        |
+        | { data: { id, name, email } }
+        |
+        */
+
+        const usuario =
+            data.data ||
+            data.user ||
+            data;
+
+
+        const id =
+            usuario.id ?? "-";
+
+        const nombre =
+            usuario.name ||
+            usuario.nombre ||
+            "Usuario";
+
+        const email =
+            usuario.email ||
+            usuario.correo ||
+            "-";
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | MOSTRAR PERFIL
+        |--------------------------------------------------------------------------
+        */
+
+        document.getElementById("profileId").textContent =
+            id;
+
+        document.getElementById("profileName").textContent =
+            nombre;
+
+        document.getElementById("profileFullName").textContent =
+            nombre;
+
+        document.getElementById("profileEmail").textContent =
+            email;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | HEADER
+        |--------------------------------------------------------------------------
+        */
+
+        document.getElementById("headerName").textContent =
+            nombre;
+
+        document.getElementById("headerEmail").textContent =
+            email;
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | INICIAL
+        |--------------------------------------------------------------------------
+        */
+
+        const inicial =
+            nombre
+                .charAt(0)
+                .toUpperCase();
+
+
+        document.getElementById("headerInitial").textContent =
+            inicial;
+
+        document.getElementById("profileAvatar").textContent =
+            inicial;
+
+
+    } catch (error) {
+
+        console.error(
+            "Error obteniendo perfil:",
+            error
+        );
+
+
+        mostrarMensaje(
+            "apiMessage",
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| LOGOUT
+|--------------------------------------------------------------------------
+*/
+
+async function logout() {
+
+    const token =
+        localStorage.getItem("auth_token");
+
+
+    if (!token) {
+
+        cerrarSesionLocal();
+
+        return;
+
+    }
+
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/auth/logout`,
+            {
+                method: "POST",
+
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+
+        const data =
+            await response.json()
+            .catch(() => ({}));
+
+
+        console.log(
+            "Respuesta logout:",
+            data
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Error logout:",
+            error
+        );
+
+    } finally {
+
+        /*
+        |--------------------------------------------------------------------------
+        | ELIMINAR TOKEN LOCAL
+        |--------------------------------------------------------------------------
+        */
+
+        localStorage.removeItem("auth_token");
+
+        cerrarSesionLocal();
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CERRAR SESIÓN LOCAL
+|--------------------------------------------------------------------------
+*/
+
+function cerrarSesionLocal() {
+
+    adminView.classList.add("hidden");
+
+    loginView.classList.remove("hidden");
+
+    loginForm.reset();
+
+    document.getElementById("email").value =
+        "admin@mail.com";
+
+    document.getElementById("password").value =
+        "Admin54321#";
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MOSTRAR PERFIL
+|--------------------------------------------------------------------------
+*/
+
+function mostrarPerfil() {
+
+    const profileCard =
+        document.getElementById("profileCard");
+
+
+    profileCard.scrollIntoView({
+        behavior: "smooth"
+    });
+
+
+    cargarPerfil();
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MOSTRAR / OCULTAR PASSWORD
+|--------------------------------------------------------------------------
+*/
+
+function mostrarPassword() {
+
+    const password =
+        document.getElementById("password");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+
+    }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| SIDEBAR MOBILE
+|--------------------------------------------------------------------------
+*/
+
+function toggleSidebar() {
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+
+    sidebar.classList.toggle(
+        "-translate-x-full"
+    );
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| MENSAJES
+|--------------------------------------------------------------------------
+*/
+
+function mostrarMensaje(
+    elementoId,
+    mensaje,
+    tipo
+) {
+
+    const elemento =
+        document.getElementById(elementoId);
+
+
+    elemento.classList.remove(
+        "hidden",
+        "bg-red-100",
+        "text-red-700",
+        "bg-green-100",
+        "text-green-700"
+    );
+
+
+    if (tipo === "success") {
+
+        elemento.classList.add(
+            "bg-green-100",
+            "text-green-700"
+        );
+
+    } else {
+
+        elemento.classList.add(
+            "bg-red-100",
+            "text-red-700"
+        );
+
+    }
+
+
+    elemento.textContent =
+        mensaje;
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| VERIFICAR SESIÓN AL CARGAR
+|--------------------------------------------------------------------------
+*/
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const token =
+            localStorage.getItem("auth_token");
+
+
+        if (token) {
+
+            mostrarAdmin();
+
+            cargarPerfil();
+
+        } else {
+
+            loginView.classList.remove(
+                "hidden"
+            );
+
+            adminView.classList.add(
+                "hidden"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+

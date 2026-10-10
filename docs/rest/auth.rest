@@ -1,0 +1,28 @@
+### Login
+POST http://localhost:8000/api/v1/auth/login
+content-type:application/json
+
+{
+    "email":"admin@mail.com",
+    "password":"Admin54321#"
+}
+
+### ver perfil
+GET http://localhost:8000/api/v1/auth/profile
+Authorization: bearer 3|4NMaSsFaNqVUd3mPvHLDfqEGAIHrIJsaCWkWFAfTe2f9212a
+
+
+###salir
+POST http://localhost:8000/api/v1/auth/logout
+Authorization: bearer 3|4NMaSsFaNqVUd3mPvHLDfqEGAIHrIJsaCWkWFAfTe2f9212a
+
+###Registro nuevo usuario
+
+POST http://localhost:8000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name":"juan",
+    "email":"tharo81a@gmail.com",
+    "password":"teo12345"
+}

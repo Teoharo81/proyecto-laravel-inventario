@@ -1,0 +1,51 @@
+<?php
+
+use App\Http\Controllers\authController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ProductoController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::get("/saludo", function(){
+    return "saludo api";
+});
+
+//autenticacion
+
+Route::prefix('v1/auth')->group(function(){//crear grupos
+
+    Route::post("/login", [authController::class,"login"]);
+
+    Route::post("/register", [authController::class,"register"]);
+
+
+    Route::middleware(['auth:sanctum'])->group(function(){
+
+        Route::get("/profile", [authController::class,"profile"]);
+
+        Route::post("/logout", [authController::class,"logout"]);
+
+
+    });
+  
+
+});
+
+//CRUD CATEGORIAS(apiResource:GET,POST,GET,PUT,DELETE)
+
+//subida de imagen
+Route::post("/producto/{id}/subir-imagen",[ProductoController::class,"actualizarImagen"]);//para subir imagen
+Route::apiResource("/categoria",CategoriaController::class);
+
+Route::apiResource("/producto",ProductoController::class);
+
+
+Route::get('no-autorizado',function(){
+    return ["mensaje"=>"No estas permitido para ver esta pagina"];
+
+})->name('login');
+

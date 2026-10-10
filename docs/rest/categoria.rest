@@ -1,0 +1,36 @@
+###Listar
+GET http://127.0.0.1:8000/api/categoria
+
+
+###Registrar
+POST http://127.0.0.1:8000/api/categoria
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"CAMISAS ",
+    "descripcion":"Camisas mangalarga"
+}
+
+### mostrar
+GET http://127.0.0.1:8000/api/categoria/3
+
+###modificar
+PUT http://127.0.0.1:8000/api/categoria/1
+Content-Type: application/json
+Accept: application/json
+
+  {
+    "id": 1,
+    "nombre": "ELECTRONICOS para el hogar",
+    "descripcion": "para equipos de computo",
+    "created_at": null,
+    "updated_at": null
+  }
+
+###eliminar
+DELETE http://127.0.0.1:8000/api/categoria/3
+
+
+
+  
