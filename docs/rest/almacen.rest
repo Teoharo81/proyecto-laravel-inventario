@@ -1,0 +1,32 @@
+###Listar
+GET http://127.0.0.1:8000/api/almacen?page=1&limit=3&search=central
+
+###Registrar
+POST http://127.0.0.1:8000/api/almacen
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"Almacen Principal",
+    "codigo":"ALM-001",
+    "descripcion":"Almacen de productos terminados",
+    "sucursal_id":1
+}
+
+###mostrar
+GET http://127.0.0.1:8000/api/almacen/1
+
+###modificar
+PUT http://127.0.0.1:8000/api/almacen/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"Almacen Principal Actualizado",
+    "codigo":"ALM-002",
+    "descripcion":"Almacen de materia prima",
+    "sucursal_id":1
+}
+
+###eliminar
+DELETE http://127.0.0.1:8000/api/almacen/1

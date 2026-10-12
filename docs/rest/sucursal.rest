@@ -1,0 +1,32 @@
+###Listar
+GET http://127.0.0.1:8000/api/sucursal?page=1&limit=3&search=central
+
+###Registrar
+POST http://127.0.0.1:8000/api/sucursal
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"Sucursal Central",
+    "direccion":"Av. Principal 123",
+    "telefono":"555-1234",
+    "ciudad":"La Paz"
+}
+
+###mostrar
+GET http://127.0.0.1:8000/api/sucursal/1
+
+###modificar
+PUT http://127.0.0.1:8000/api/sucursal/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre":"Sucursal Central Actualizada",
+    "direccion":"Av. Principal 456",
+    "telefono":"555-9999",
+    "ciudad":"Santa Cruz"
+}
+
+###eliminar
+DELETE http://127.0.0.1:8000/api/sucursal/1

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\SucursalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +44,12 @@ Route::post("/producto/{id}/subir-imagen",[ProductoController::class,"actualizar
 Route::apiResource("/categoria",CategoriaController::class);
 
 Route::apiResource("/producto",ProductoController::class);
+
+//CRUD SUCURSALES
+Route::apiResource("/sucursal",SucursalController::class);
+
+//CRUD ALMACENES
+Route::apiResource("/almacen",AlmacenController::class);
 
 
 Route::get('no-autorizado',function(){
