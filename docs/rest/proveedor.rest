@@ -1,0 +1,38 @@
+###Listar
+GET http://127.0.0.1:8000/api/proveedor?page=1&limit=3&search=distribuidora
+
+###Registrar
+POST http://127.0.0.1:8000/api/proveedor
+Content-Type: application/json
+Accept: application/json
+
+{
+    "razon_social":"Distribuidora Los Andes S.A.",
+    "nro_identificacion":"20123456789",
+    "contacto":"Maria Lopez",
+    "telefono":"555-4321",
+    "correo":"ventas@losandes.com",
+    "observaciones":"Entrega en 48 horas",
+    "estado":true
+}
+
+###mostrar
+GET http://127.0.0.1:8000/api/proveedor/1
+
+###modificar
+PUT http://127.0.0.1:8000/api/proveedor/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "razon_social":"Distribuidora Los Andes S.A.C.",
+    "nro_identificacion":"20123456789",
+    "contacto":"Maria Lopez",
+    "telefono":"555-9999",
+    "correo":"ventas@losandes.pe",
+    "observaciones":"Entrega en 24 horas",
+    "estado":true
+}
+
+###eliminar
+DELETE http://127.0.0.1:8000/api/proveedor/1

@@ -3,7 +3,9 @@
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\SucursalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +52,12 @@ Route::apiResource("/sucursal",SucursalController::class);
 
 //CRUD ALMACENES
 Route::apiResource("/almacen",AlmacenController::class);
+
+//CRUD CLIENTES
+Route::apiResource("/cliente",ClienteController::class);
+
+//CRUD PROVEEDORES
+Route::apiResource("/proveedor",ProveedorController::class);
 
 
 Route::get('no-autorizado',function(){

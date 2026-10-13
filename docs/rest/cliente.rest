@@ -1,0 +1,36 @@
+###Listar
+GET http://127.0.0.1:8000/api/cliente?page=1&limit=3&search=juan
+
+###Registrar
+POST http://127.0.0.1:8000/api/cliente
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre_completo":"Juan Perez",
+    "nro_identificacion":"12345678",
+    "fecha_nacimiento":"1990-05-15",
+    "telefono":"555-1234",
+    "correo":"juan.perez@example.com",
+    "estado":true
+}
+
+###mostrar
+GET http://127.0.0.1:8000/api/cliente/1
+
+###modificar
+PUT http://127.0.0.1:8000/api/cliente/1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nombre_completo":"Juan Perez Actualizado",
+    "nro_identificacion":"87654321",
+    "fecha_nacimiento":"1990-05-15",
+    "telefono":"555-9999",
+    "correo":"juan.actualizado@example.com",
+    "estado":true
+}
+
+###eliminar
+DELETE http://127.0.0.1:8000/api/cliente/1
