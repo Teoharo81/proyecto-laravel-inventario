@@ -1,0 +1,26 @@
+GET http://127.0.0.1:8000/api/compra
+
+
+###Registrar compra
+
+POST http://127.0.0.1:8000/api/compra
+Content-Type: application/json
+Accept: application/json
+
+{
+
+          
+            "proveedor_id": 1,
+            "descuento_total":0,
+            "detalle":"S/D",
+            "observaciones":"S/O",
+            "movimientos":[
+                {"almacen_id":1,"producto_id":1, "cantidad":5, "precio_unitario_compra":1500, "observaciones":"ninguna"},
+                {"almacen_id":1,"producto_id":2, "cantidad":20, "precio_unitario_compra":250,"observaciones":"ninguna"}
+            ]
+
+            
+
+
+
+}

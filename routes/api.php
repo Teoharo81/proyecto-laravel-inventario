@@ -4,6 +4,7 @@ use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\SucursalController;
@@ -43,21 +44,24 @@ Route::prefix('v1/auth')->group(function(){//crear grupos
 
 //subida de imagen
 Route::post("/producto/{id}/subir-imagen",[ProductoController::class,"actualizarImagen"]);//para subir imagen
-Route::apiResource("/categoria",CategoriaController::class);
+Route::apiResource("/categoria", CategoriaController::class);
 
-Route::apiResource("/producto",ProductoController::class);
+Route::apiResource("/producto", ProductoController::class);
 
 //CRUD SUCURSALES
-Route::apiResource("/sucursal",SucursalController::class);
+Route::apiResource("/sucursal", SucursalController::class);
 
 //CRUD ALMACENES
-Route::apiResource("/almacen",AlmacenController::class);
+Route::apiResource("/almacen", AlmacenController::class);
 
 //CRUD CLIENTES
-Route::apiResource("/cliente",ClienteController::class);
+Route::apiResource("/cliente", ClienteController::class);
 
 //CRUD PROVEEDORES
-Route::apiResource("/proveedor",ProveedorController::class);
+Route::apiResource("/proveedor", ProveedorController::class);
+
+//CRUD COMPRAS
+Route::apiResource("/compra", CompraController::class);
 
 
 Route::get('no-autorizado',function(){
