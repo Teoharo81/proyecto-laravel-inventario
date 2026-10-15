@@ -1,4 +1,4 @@
-GET http://127.0.0.1:8000/api/producto?page=1&limit=3&search=zap
+GET http://127.0.0.1:8000/api/producto?page=1&limit=30&search=&almacen_id=1
 
 ###guardar
 POST http://127.0.0.1:8000/api/producto

@@ -1,4 +1,7 @@
+###Listar
 GET http://127.0.0.1:8000/api/compra
+Authorization: bearer 5|3P5yslbFdrIwXYbhcdXjyKxwR4f6lNXWwpvdJiMJ591a3f4a
+Accept: application/json
 
 
 ###Registrar compra
@@ -6,6 +9,7 @@ GET http://127.0.0.1:8000/api/compra
 POST http://127.0.0.1:8000/api/compra
 Content-Type: application/json
 Accept: application/json
+Authorization: bearer 5|3P5yslbFdrIwXYbhcdXjyKxwR4f6lNXWwpvdJiMJ591a3f4a
 
 {
 
@@ -20,6 +24,7 @@ Accept: application/json
             ]
 
             
+
 
 
 

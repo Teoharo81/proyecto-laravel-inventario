@@ -1,0 +1,46 @@
+###Listar
+GET http://127.0.0.1:8000/api/venta
+Authorization: bearer 5|3P5yslbFdrIwXYbhcdXjyKxwR4f6lNXWwpvdJiMJ591a3f4a
+Accept: application/json
+
+###Registrar venta
+
+POST http://127.0.0.1:8000/api/venta
+Content-Type: application/json
+Accept: application/json
+Authorization: bearer 5|3P5yslbFdrIwXYbhcdXjyKxwR4f6lNXWwpvdJiMJ591a3f4a
+
+{
+    "cliente_id": 3,
+    "descuento_total": 0,
+    "detalle": "venta mostrador",
+    "observaciones": "S/O",
+    "movimientos": [
+        {"almacen_id": 1, "producto_id": 1, "cantidad": 2, "precio_unitario_venta": 2000, "observaciones": "ninguna"},
+        {"almacen_id": 1, "producto_id": 2, "cantidad": 5, "precio_unitario_venta": 300, "observaciones": "ninguna"}
+    ]
+}
+
+###mostrar
+GET http://127.0.0.1:8000/api/venta/1
+Authorization: bearer {{token}}
+Accept: application/json
+
+###modificar (solo cabecera)
+PUT http://127.0.0.1:8000/api/venta/1
+Content-Type: application/json
+Accept: application/json
+Authorization: bearer {{token}}
+
+{
+    "cliente_id": 1,
+    "descuento_total": 10,
+    "detalle": "Venta con descuento",
+    "observaciones": "Actualizada",
+    "estado": "COMPLETADO"
+}
+
+###eliminar (devuelve el stock)
+DELETE http://127.0.0.1:8000/api/venta/1
+Authorization: bearer {{token}}
+Accept: application/json

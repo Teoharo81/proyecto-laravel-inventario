@@ -14,16 +14,25 @@ class ProductoController extends Controller
     {
         $limite=$request->limit;//para limites 
         $buscar=$request->search;//para buscar
+        $almacen=$request->almacen_id;
         //listado de productos
 
-        $productos=Producto::with("categoria")//traer la categoria del producto
-                            ->where(function($query) use ($buscar){//agrupar los filtros de busqueda
-                                $query->where("nombre","iLIKE","%$buscar%")//buscar por nombre
-                                      ->orwhere("codigo_barra","iLIKE","%$buscar%");//buscar por codigo_barra
-                            })
-                            ->orderby('id','DESC')//ordenar descendente
-                            ->paginate($limite);//paginacion, 10 item por hoja
-        return response($productos);
+        $productos=Producto::with(["categoria",'almacenes'])//traer la categoria del producto
+                ->where(function($query) use ($buscar){//agrupar los filtros de busqueda
+                    $query->where("nombre","iLIKE","%$buscar%")//buscar por nombre
+                        ->orwhere("codigo_barra","iLIKE","%$buscar%");//buscar por codigo_barra
+                })
+                ->orderby('id','DESC');//ordenar descendente
+        
+        if(isset($almacen)){
+            $productos=$productos->whereHas("almacenes",function($query)use ($almacen){
+                $query->where("almacens.id","=",$almacen);
+            });
+
+        }
+        
+        $productos=$productos->paginate($limite);//paginacion, 10 item por hoja
+        return response()->json($productos);
         
     }
 

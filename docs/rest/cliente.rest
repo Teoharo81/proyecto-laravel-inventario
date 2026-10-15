@@ -7,13 +7,15 @@ Content-Type: application/json
 Accept: application/json
 
 {
-    "nombre_completo":"Juan Perez",
-    "nro_identificacion":"12345678",
-    "fecha_nacimiento":"1990-05-15",
+    "nombre_completo":"Rubi Eleno",
+    "nro_identificacion":"40950545",
+    "fecha_nacimiento":"1982-02-01",
     "telefono":"555-1234",
-    "correo":"juan.perez@example.com",
+    "correo":"rubi.perez@example.com",
     "estado":true
 }
+
+
 
 ###mostrar
 GET http://127.0.0.1:8000/api/cliente/1

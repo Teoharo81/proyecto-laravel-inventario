@@ -7,19 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Compra extends Model
 {
     //
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function proveedor(){
+    public function proveedor()
+    {
         return $this->belongsTo(Proveedor::class);
     }
 
-      public function almacen_producto_venta(){
-        return $this->belongsToMany(Producto::class,"detalle_compra")
-                    ->withPivot(["almacen_id","cantidad","precio_unitario_compra","obsevaciones"])
-                    ->withTimestamps();
+    public function almacen_producto_compra()
+    {
+        return $this->belongsToMany(Producto::class, 'detalle_compra')
+            ->withPivot(['almacen_id', 'cantidad', 'precio_unitario_compra', 'observaciones'])
+            ->withTimestamps();
     }
-    
-
 }
