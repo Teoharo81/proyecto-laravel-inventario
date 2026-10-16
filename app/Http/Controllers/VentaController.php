@@ -171,10 +171,33 @@ class VentaController extends Controller
     }
 
     public function generarReciboPDF($id){
-        $data=venta::with(['user','cliente','almacen_producto_venta'])->find($id);
+        $data = Venta::with(['user','cliente','almacen_producto_venta'])->find($id);
 
-        $pdf = Pdf::loadView('pdf.recibo', ["data"=>$data]);
-        return $pdf->download('recibo.pdf');
+        if (!$data) {
+            return response()->json(['mensaje' => 'Venta no encontrada'], 404);
+        }
+
+        // Calcular subtotal
+        $subtotal = 0;
+        foreach ($data->almacen_producto_venta as $producto) {
+            $cantidad = (float) ($producto->pivot->cantidad ?? 0);
+            $precio = (float) ($producto->pivot->precio_unitario_venta ?? 0);
+            $subtotal += ($cantidad * $precio);
+        }
+
+        $descuento = (float) ($data->descuento_total ?? 0);
+        $total = $subtotal - $descuento;
+        if ($total < 0) {
+            $total = 0;
+        }
+
+        $pdf = Pdf::loadView('pdf.recibo', [
+            'data' => $data,
+            'subtotal' => $subtotal,
+            'descuento' => $descuento,
+            'total' => $total,
+        ]);
+        return $pdf->download("$data->codigo-recibo.pdf");
     }
 
 
