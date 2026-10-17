@@ -40,6 +40,8 @@ Route::prefix('v1/auth')->group(function () {// crear grupos
 
 // CRUD CATEGORIAS(apiResource:GET,POST,GET,PUT,DELETE)
 
+//generar excell
+Route::get("/producto/generar-excel",[ProductoController::class,"exportarExcell"]);
 //generar PDF
 Route::get("/venta/{id}/generar-pdf",[VentaController::class,"generarReciboPDF"]);
 Route::get("/compra/{id}/generar-pdf",[CompraController::class,"generarReciboPDF"]);
